@@ -66,7 +66,7 @@ const verifyAuth = async (req: express.Request, res: express.Response, next: exp
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   // Webhook endpoint needs raw body
   app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
