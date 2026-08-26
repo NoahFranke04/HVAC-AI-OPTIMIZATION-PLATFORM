@@ -1,0 +1,112 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user account information and subscription status.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "subscriptionTier": { "type": "string", "enum": ["free", "pro", "enterprise"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "subscriptionTier"]
+    },
+    "Home": {
+      "title": "Home Profile",
+      "description": "Stores physical characteristics of a home for HVAC analysis.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "squareFootage": { "type": "number" },
+        "location": { "type": "string" },
+        "insulationLevel": { "type": "string", "enum": ["poor", "average", "good", "excellent"] },
+        "hvacType": { "type": "string" },
+        "occupancy": { "type": "number" },
+        "efficiencyScore": { "type": "number" }
+      },
+      "required": ["userId", "squareFootage", "location"]
+    },
+    "EnergyData": {
+      "title": "Energy Usage Data",
+      "description": "Time-series data for energy consumption.",
+      "type": "object",
+      "properties": {
+        "homeId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "usage": { "type": "number" },
+        "cost": { "type": "number" }
+      },
+      "required": ["homeId", "timestamp", "usage"]
+    },
+    "Recommendation": {
+      "title": "AI Recommendation",
+      "description": "AI-generated efficiency improvements.",
+      "type": "object",
+      "properties": {
+        "homeId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "reasoning": { "type": "string" },
+        "confidence": { "type": "number" },
+        "estimatedSavings": { "type": "number" },
+        "roi": { "type": "number" },
+        "priority": { "type": "number" }
+      },
+      "required": ["homeId", "title", "estimatedSavings"]
+    },
+    "ContractorLead": {
+      "title": "Contractor Lead",
+      "description": "User request for a contractor quote.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "homeId": { "type": "string" },
+        "contractorName": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "contacted", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "contractorName"]
+    },
+    "AnalyticsEvent": {
+      "title": "Analytics Event",
+      "description": "Tracks user interactions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "eventType": { "type": "string" },
+        "metadata": { "type": "object" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["eventType", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profiles indexed by UID."
+    },
+    "/homes/{homeId}": {
+      "schema": "Home",
+      "description": "Home profiles."
+    },
+    "/homes/{homeId}/energyData/{dataId}": {
+      "schema": "EnergyData",
+      "description": "Energy usage data for a specific home."
+    },
+    "/homes/{homeId}/recommendations/{recId}": {
+      "schema": "Recommendation",
+      "description": "AI recommendations for a specific home."
+    },
+    "/leads/{leadId}": {
+      "schema": "ContractorLead",
+      "description": "Contractor leads."
+    },
+    "/analytics/{eventId}": {
+      "schema": "AnalyticsEvent",
+      "description": "Global analytics events."
+    }
+  }
+}
