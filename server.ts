@@ -67,7 +67,9 @@ const verifyAuth = async (req: express.Request, res: express.Response, next: exp
 async function startServer() {
   const app = express();
   // Cloud Run injects PORT. The sandbox injects DEFAULT_APP_PORT=3000.
-  const PORT = Number(process.env.DEFAULT_APP_PORT) || Number(process.env.PORT) || 8080;
+  const PORT = process.env.DEFAULT_APP_PORT 
+    ? parseInt(process.env.DEFAULT_APP_PORT, 10)
+    : (process.env.PORT ? parseInt(process.env.PORT, 10) : 3000);
 
   // Webhook endpoint needs raw body
   app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
