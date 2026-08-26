@@ -1,7 +1,7 @@
 # ❄️ HVAC AI - Smart Diagnostics & Optimization System
 **React • Node.js • Firebase • Stripe • React Native • Gemini AI**
 
-**Live Demo:** [https://ais-pre-ixxtymxov665wjt2cm5dco-36926239915.us-west2.run.app](https://ais-pre-ixxtymxov665wjt2cm5dco-36926239915.us-west2.run.app)
+**Live Demo:** https://hvac-ai-optimization-platform-362221022690.us-central1.run.app
 
 ## 📌 Project Overview
 A production-ready full-stack SaaS application and companion mobile app that leverages AI to analyze HVAC data plates, predict system failures, and optimize energy consumption. The system provides tiered access, minimizing downtime and maximizing efficiency for both homeowners and commercial technicians.
